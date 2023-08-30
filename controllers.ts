@@ -20,7 +20,6 @@ async function _loadRepository(repoName: string) {
         }
     }
 
-
     for (let virtualPath of virtualPaths) {
         promises.push(processFile(virtualPath));
     }

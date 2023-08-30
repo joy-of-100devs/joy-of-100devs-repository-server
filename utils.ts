@@ -21,6 +21,11 @@ export function cache<T>(func: (arg: string) => T, options: CacheOptions = {}) {
             updatedAt: new Date(),
             value: result,
         };
+        if (result instanceof Promise) {
+            result.catch(() => {
+               cache[arg] = undefined;
+            });
+        }
         return result;
     }
 }
