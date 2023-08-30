@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "parcel": "^2.9.3"
+  },
+  "sandpack": {
+    "initialActiveFile": "/index.html"
   }
 }
