@@ -1,0 +1,25 @@
+{
+  "name": "hello-html-worked-example",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "parcel": "^2.9.3"
+  },
+  "sandpack": {
+    "initialActiveFile": "/index.html",
+    "files": {
+      "package.json": {
+        "hidden": true
+      },
+      "package-lock.json": {
+        "hidden": true
+      }
+    }
+  }
+}
