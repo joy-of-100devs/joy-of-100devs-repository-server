@@ -14,11 +14,13 @@
   "sandpack": {
     "initialActiveFile": "/index.html",
     "files": {
-      "package.json": {
-        "hidden": true
+      "/package.json": {
+        "hidden": true,
+        "readOnly": true
       },
-      "package-lock.json": {
-        "hidden": true
+      "/package-lock.json": {
+        "hidden": true,
+        "readOnly": true
       }
     }
   }
