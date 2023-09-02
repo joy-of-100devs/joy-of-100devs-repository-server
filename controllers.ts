@@ -6,7 +6,7 @@ import typeIs from 'type-is';
 import mimeTypes from 'mime-types';
 
 const CONTENT_ROOT = "./repositories";
-const ACCEPTED_TYPES = ["image/svg+xml", "text/*", "application/html", "application/json", "application/javascript"]
+const ACCEPTED_TYPES = ["image/svg+xml", "text/*", "application/html", "application/json", "application/javascript"];
 
 async function _loadRepository(repoName: string) {
     const promises: Promise<void>[] = [];
@@ -27,7 +27,7 @@ async function _loadRepository(repoName: string) {
     await Promise.allSettled(promises);
     const json = JSON.parse(fileMapping["/package.json"]);
 
-    let initialActiveFile: string|undefined;
+    let initialActiveFile: string | undefined;
     if (json.sandpack?.initialActiveFile) {
         initialActiveFile = path.join("/", json.sandpack?.initialActiveFile).replaceAll("\\", "/");
     }
@@ -40,7 +40,7 @@ async function _loadRepository(repoName: string) {
             active: initialActiveFile === file,
             hidden: sandpackFileConfig?.hidden ?? false,
             readOnly: sandpackFileConfig?.readOnly ?? false,
-        }
+        };
     }
 
     return {
@@ -72,6 +72,7 @@ async function getRecursiveFiles(repoName: string) {
         if (dir === "/node_modules") return;
 
         let promises = [];
+
         async function processEntry(entry: string) {
             const virtualEntryPath = path.join(dir, entry).replaceAll("\\", "/");
             const realEntryPath = getRealPath(virtualEntryPath);
