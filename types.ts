@@ -16,6 +16,7 @@ export namespace SandpackRepository {
         initialActiveFile?: string;
         environment?: string;
         files?: Record<string, SandpackFileConfig>;
+        externalResources?: string[];
     }
 
     export interface SandpackPackageData {

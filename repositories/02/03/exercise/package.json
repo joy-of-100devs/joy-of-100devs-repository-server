@@ -1,0 +1,25 @@
+{
+  "name": "03",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "sandpack": {
+    "initialActiveFile": "/index.html",
+    "externalResources": [
+      "https://meyerweb.com/eric/tools/css/reset/reset.css"
+    ],
+    "files":  {
+      "/package.json": {
+        "hidden": true
+      },
+      "/package-lock.json": {
+        "hidden": true
+      }
+    }
+  }
+}
