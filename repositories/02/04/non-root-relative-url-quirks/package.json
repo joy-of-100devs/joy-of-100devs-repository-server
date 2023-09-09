@@ -1,8 +1,8 @@
 {
-  "name": "preview-playground",
+  "name": "non-root-relative-url-quirks",
   "version": "1.0.0",
   "description": "",
-  "main": "/index.html",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,15 @@
   "license": "ISC",
   "sandpack": {
     "initialActiveFile": "/index.html",
+    "files": {
+      "/package.json": {
+        "hidden": true
+      },
+      "/package-lock.json": {
+        "hidden": true
+      }
+    },
+    "startRoute": "/ice-cream.html",
     "environment": "static"
   }
 }

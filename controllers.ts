@@ -7,6 +7,7 @@ import mimeTypes from 'mime-types';
 
 const CONTENT_ROOT = "./repositories";
 const ACCEPTED_TYPES = ["image/svg+xml", "text/*", "application/html", "application/json", "application/javascript"];
+const ACCEPTED_EXTENSIONS = [".ts", ".tsx"];
 
 async function _loadRepository(repoName: string) {
     const promises: Promise<void>[] = [];
@@ -54,8 +55,8 @@ async function readFile(repoName: string, virtualPath: string) {
     const extension = path.parse(realPath).ext;
     const mimeType = mimeTypes.lookup(extension);
     const typing = typeIs.is(mimeType || '', ACCEPTED_TYPES);
-    if (!typing) {
-        throw new Error("This type is not supported.");
+    if (!typing && !ACCEPTED_EXTENSIONS.includes(extension)) {
+        throw new Error(`This type ${mimeType} and extension ${extension} is not supported.`);
     }
     return (await fs.promises.readFile(realPath)).toString();
 }
