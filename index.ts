@@ -17,6 +17,7 @@ app.get("/api/*", async function(req: express.Request<{0: string}>, res) {
     data: output,
   })
 })
+app.use("/static", express.static("./static"));
 
 app.use("*", (e: unknown, req: express.Request, res: express.Response, next: NextFunction) => {
   console.error(e);
