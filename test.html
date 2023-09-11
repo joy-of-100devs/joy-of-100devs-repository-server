@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  class Oof {
+    constructor() {
+      console.log(1);
+    }
+  }
+
+  Oof.prototype.constructor = function() {
+    console.log(2);
+  }
+
+  console.log(Oof.prototype.constructor, Oof)
+</script>
+</body>
+</html>
