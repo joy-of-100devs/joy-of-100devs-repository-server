@@ -1,3 +1,4 @@
+// Navigation communication with the parent server.
 (function () {
     window.parent.postMessage({
         $type: "UrlUpdate",
@@ -44,24 +45,8 @@
     receiveCommand("getUrl", () => {
         return window.location.href;
     });
-
-    window.addEventListener("click", e => {
-        const nearbyAnchor = e.target.closest("a");
-        if (!nearbyAnchor) return;
-        // Hijacks URL clicks to warn against getting out of domain.
-        if (new URL(nearbyAnchor.href).origin === window.location.origin) return;
-        const confirmRedirect =
-            confirm("Are you sure to go to another website?\n\n" +
-                "Due to security restrictions, the website may not work, and you will not be able to go " +
-                "back to previous pages.\n\nYou can click on the double-left-arrow button to go back to the starting " +
-                "point of the web app.");
-        // Cancels clicking of link.
-        if (!confirmRedirect) {
-            e.preventDefault();
-        }
-    });
 })();
-
+// Logging features.
 (function () {
     const inspect = (function () {
         function inspect(obj, opts) {
@@ -531,4 +516,48 @@
     window.addEventListener("error", function (e) {
         console.error(e.error?.stack ?? e.error)
     })
+})();
+// Prevent external navigation or force it in a new tab.
+(function () {
+    function openUrlInNewTab(url) {
+        if (!confirm(`Are you sure to go to ${new URL(url, location.origin).hostname}?
+        
+Due to security restrictions, the website must be opened onto this tab.
+Your progress will be saved.`)) return;
+        const element = document.createElement("a");
+        element.href = url;
+        element.target = "_parent";
+        element.click();
+    }
+
+    function compareOrigin(url) {
+        return new URL(url, location.origin).origin === location.origin;
+    }
+
+    window.addEventListener("click", e => {
+        const nearbyAnchor = e.target.closest("a");
+        if (!nearbyAnchor) return;
+        // Hijacks URL clicks to warn against getting out of domain.
+        if (compareOrigin(nearbyAnchor.href)) return;
+        e.preventDefault();
+        openUrlInNewTab(nearbyAnchor.href);
+    });
+
+    let _replace = location.replace;
+    location.replace = function (link) {
+        if (compareOrigin(link)) {
+            return _replace(link);
+        } else {
+            openUrlInNewTab(link);
+        }
+    };
+
+    let _assign = location.assign;
+    location.assign = function (link) {
+        if (compareOrigin(link)) {
+            return _assign(link);
+        } else {
+            openUrlInNewTab(link);
+        }
+    };
 })();
